@@ -31,12 +31,6 @@ struct MovieListView: View {
                         .searchCompletion(suggestion)
                 }
             }
-            .onChange(of: viewModel.searchText) { _ in
-                Task {
-                    await viewModel.searchMovies()
-                    viewModel.updateSuggestions()
-                }
-            }
             .task {
                 await viewModel.fetchMovies()
             }

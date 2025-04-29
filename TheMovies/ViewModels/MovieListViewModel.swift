@@ -6,16 +6,21 @@
 //
 
 import Foundation
+
 @MainActor
 final class MovieListViewModel: ObservableObject {
     @Published var movies: [Movie] = []
     @Published var isLoading = false
-    @Published var searchText = ""
+    @Published var searchText = "" {
+        didSet {
+            debounceSearch()
+        }
+    }
     @Published var suggestions: [String] = []
     
     private var currentPage = 1
     private var service: MovieServiceProtocol
-    private var isSearching = false
+    private var debounceTask: Task<Void, Never>?
     
     init(service: MovieServiceProtocol = MovieService()) {
         self.service = service
@@ -28,12 +33,13 @@ final class MovieListViewModel: ObservableObject {
             let newMovies = try await service.fetchLatestMovies(page: currentPage)
             movies.append(contentsOf: newMovies)
             currentPage += 1
+            updateSuggestions()
         } catch {
             print("Failed to fetch movies: \(error)")
         }
         isLoading = false
     }
-    
+
     func searchMovies() async {
         guard !searchText.isEmpty else {
             movies = []
@@ -41,22 +47,30 @@ final class MovieListViewModel: ObservableObject {
             await fetchMovies()
             return
         }
-        
+
         isLoading = true
         defer { isLoading = false }
-        
+
         do {
             let results = try await (service as! MovieService).searchMovies(query: searchText)
             movies = results
+            updateSuggestions()
         } catch {
             print("Search error: \(error)")
         }
     }
-    
-    func updateSuggestions() {
-        let lowercasedQuery = searchText.lowercased()
-        suggestions = movies
-            .map { $0.title }
-            .filter { $0.lowercased().hasPrefix(lowercasedQuery) }
+
+    private func debounceSearch() {
+        debounceTask?.cancel()
+        debounceTask = Task { [weak self] in
+            try? await Task.sleep(nanoseconds: 400_000_000) // 400ms
+            guard !Task.isCancelled else { return }
+            await self?.searchMovies()
+        }
+    }
+
+    private func updateSuggestions() {
+        let titles = movies.map { $0.title.trimmingCharacters(in: .whitespaces) }
+        suggestions = Array(Set(titles)).sorted()
     }
 }
