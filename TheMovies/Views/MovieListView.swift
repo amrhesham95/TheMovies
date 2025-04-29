@@ -16,7 +16,7 @@ struct MovieListView: View {
                 NavigationLink(destination: MovieDetailView(movie: movie)) {
                     MovieRowView(movie: movie)
                         .onAppear {
-                            if movie == viewModel.movies.last {
+                            if movie == viewModel.movies.last && viewModel.searchText.isEmpty {
                                 Task {
                                     await viewModel.fetchMovies()
                                 }
@@ -25,6 +25,18 @@ struct MovieListView: View {
                 }
             }
             .navigationTitle("Latest Movies")
+            .searchable(text: $viewModel.searchText, prompt: "Search movies...") {
+                ForEach(viewModel.suggestions, id: \.self) { suggestion in
+                    Text(suggestion)
+                        .searchCompletion(suggestion)
+                }
+            }
+            .onChange(of: viewModel.searchText) { _ in
+                Task {
+                    await viewModel.searchMovies()
+                    viewModel.updateSuggestions()
+                }
+            }
             .task {
                 await viewModel.fetchMovies()
             }
