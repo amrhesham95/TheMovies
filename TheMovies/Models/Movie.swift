@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct Movie: Codable, Equatable {
     let adult: Bool
     let backdropPath: String?
     let genreIds: [Int]
@@ -38,5 +38,15 @@ struct Movie: Codable {
         case video
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
+    }
+}
+
+extension Movie {
+    var posterURL: URL? {
+        URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")
+    }
+    
+    var backdropURL: URL? {
+        URL(string: "https://image.tmdb.org/t/p/w780\(backdropPath ?? "")")
     }
 }
