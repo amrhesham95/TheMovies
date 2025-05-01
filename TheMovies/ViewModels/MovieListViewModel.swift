@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 @MainActor
 protocol MovieListViewModelProtocol: ObservableObject {
     var movies: [Movie] { get }
@@ -36,8 +34,8 @@ final class MovieListViewModel: MovieListViewModelProtocol, ObservableObject {
     private let fetchMoviesUseCase: FetchLatestMoviesUseCase
     private let searchUseCase: SearchMoviesUseCase
     
-    init(fetchMoviesUseCase: FetchLatestMoviesUseCase = FetchLatestMoviesUseCaseImpl(),
-         searchUseCase: SearchMoviesUseCase = SearchMoviesUseCaseImpl()) {
+    init(fetchMoviesUseCase: FetchLatestMoviesUseCase,
+         searchUseCase: SearchMoviesUseCase) {
         self.fetchMoviesUseCase = fetchMoviesUseCase
         self.searchUseCase = searchUseCase
     }

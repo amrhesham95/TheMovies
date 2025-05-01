@@ -13,7 +13,7 @@ protocol SearchMoviesUseCase {
 final class SearchMoviesUseCaseImpl: SearchMoviesUseCase {
     private let service: MovieServiceProtocol
 
-    init(service: MovieServiceProtocol = MovieService()) {
+    init(service: MovieServiceProtocol) {
         self.service = service
     }
 

@@ -14,7 +14,7 @@ protocol FetchLatestMoviesUseCase {
 final class FetchLatestMoviesUseCaseImpl: FetchLatestMoviesUseCase {
     private let service: MovieServiceProtocol
 
-    init(service: MovieServiceProtocol = MovieService()) {
+    init(service: MovieServiceProtocol) {
         self.service = service
     }
 
