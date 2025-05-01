@@ -28,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD086FEF2DC375D9005753FB /* TheMovies.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TheMovies.xctestplan; sourceTree = "<group>"; };
 		FDCDFD422DBFE72F0014A900 /* TheMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDCDFD532DBFE7310014A900 /* TheMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDCDFD5D2DBFE7310014A900 /* TheMoviesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheMoviesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,11 +43,6 @@
 		FDCDFD562DBFE7310014A900 /* TheMoviesTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = TheMoviesTests;
-			sourceTree = "<group>";
-		};
-		FDCDFD602DBFE7310014A900 /* TheMoviesUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = TheMoviesUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -80,9 +76,9 @@
 		FDCDFD392DBFE72F0014A900 = {
 			isa = PBXGroup;
 			children = (
+				FD086FEF2DC375D9005753FB /* TheMovies.xctestplan */,
 				FDCDFD442DBFE72F0014A900 /* TheMovies */,
 				FDCDFD562DBFE7310014A900 /* TheMoviesTests */,
-				FDCDFD602DBFE7310014A900 /* TheMoviesUITests */,
 				FDCDFD432DBFE72F0014A900 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -158,9 +154,6 @@
 			);
 			dependencies = (
 				FDCDFD5F2DBFE7310014A900 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				FDCDFD602DBFE7310014A900 /* TheMoviesUITests */,
 			);
 			name = TheMoviesUITests;
 			packageProductDependencies = (

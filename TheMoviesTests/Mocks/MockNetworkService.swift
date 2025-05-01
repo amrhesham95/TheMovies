@@ -10,6 +10,7 @@ import XCTest
 
 class MockNetworkService: NetworkServiceProtocol {
     private let mockData: Data
+    var shouldFail: Bool = false
     
     init(mockDataFileName: String = "MockMoviesResponse", fileExtension: String = "json") {
         guard let url = Bundle(for: type(of: self)).url(forResource: mockDataFileName, withExtension: fileExtension) else {
@@ -24,6 +25,9 @@ class MockNetworkService: NetworkServiceProtocol {
     }
     
     func request<T: Decodable>(_ endpoint: URL) async throws -> T {
+        if shouldFail {
+            throw URLError(.badServerResponse)
+        }
         let decoder = JSONDecoder()
         return try decoder.decode(T.self, from: mockData)
     }

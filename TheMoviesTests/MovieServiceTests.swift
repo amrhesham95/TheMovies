@@ -51,4 +51,20 @@ final class MovieServiceTests: XCTestCase {
             XCTFail("Expected success, but got error: \(error)")
         }
     }
+    
+    func testServiceFailure() async {
+        // given
+        mockNetworkService.shouldFail = true
+        
+        // when
+        do {
+            let _ = try await movieService.fetchLatestMovies(page: 1)
+            
+            XCTFail("Expected failure, but got success")
+        } catch {
+            // then
+            XCTAssertTrue(error is URLError)
+
+        }
+    }
 }
