@@ -17,7 +17,7 @@ struct MovieListView<ViewModel: MovieListViewModelProtocol>: View {
 
     var body: some View {
         NavigationStack {
-            List(viewModel.movies, id: \.self.id) { movie in                
+            List(viewModel.movies) { movie in                
                 NavigationLink(destination: MovieDetailView(movie: movie)) {
                     MovieRowView(movie: movie)
                         .onAppear {
