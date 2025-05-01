@@ -7,8 +7,21 @@
 
 import Foundation
 
+import Foundation
+
 @MainActor
-final class MovieListViewModel: ObservableObject {
+protocol MovieListViewModelProtocol: ObservableObject {
+    var movies: [Movie] { get }
+    var isLoading: Bool { get }
+    var searchText: String { get set }
+    var suggestions: [String] { get }
+
+    func fetchMovies() async
+    func searchMovies() async
+}
+
+@MainActor
+final class MovieListViewModel: MovieListViewModelProtocol, ObservableObject {
     @Published var movies: [Movie] = []
     @Published var isLoading = false
     @Published var searchText = "" {

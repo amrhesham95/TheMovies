@@ -7,9 +7,13 @@
 
 import SwiftUI
 
-struct MovieListView: View {
-    @StateObject private var viewModel = MovieListViewModel()
+struct MovieListView<ViewModel: MovieListViewModelProtocol>: View {
+    @StateObject private var viewModel: ViewModel
     
+    init(viewModel: ViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+
     var body: some View {
         NavigationStack {
             List(viewModel.movies, id: \.self.id) { movie in                
