@@ -89,4 +89,28 @@ final class MovieListViewModelTests: XCTestCase {
         
         XCTAssertEqual(viewModel.movies.count, Movie.mock.count)
     }
+    
+    func test_fetchMovies_sets_isLoading_true_then_false() async {
+        // given:
+        let expectationLoadingStart = XCTestExpectation(description: "isLoading should be true")
+        let expectationLoadingEnd = XCTestExpectation(description: "isLoading should be false after fetchMovies completes")
+        
+        // Observe
+        viewModel.$isLoading
+            .sink { isLoading in
+                if isLoading {
+                    expectationLoadingStart.fulfill()
+                } else {
+                    expectationLoadingEnd.fulfill()
+                }
+            }
+            .store(in: &cancellables)
+        
+        // when: Call fetchMovies() and check isLoading
+        await viewModel.fetchMovies()
+        
+        // then
+        await fulfillment(of: [expectationLoadingStart], timeout: 1) // Wait for loading to start
+        await fulfillment(of: [expectationLoadingEnd], timeout: 1) // Wait for loading to end
+    }
 }

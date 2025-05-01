@@ -14,37 +14,46 @@ struct MovieListView<ViewModel: MovieListViewModelProtocol>: View {
     init(viewModel: ViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-
+    
     var body: some View {
         NavigationStack {
-            List(viewModel.movies) { movie in                
-                NavigationLink(destination: MovieDetailView(movie: movie)) {
-                    MovieRowView(movie: movie)
-                        .onAppear {
-                            if movie == viewModel.movies.last && viewModel.searchText.isEmpty {
-                                Task {
-                                    await viewModel.fetchMovies()
+            ZStack {
+                List(viewModel.movies) { movie in
+                    NavigationLink(destination: MovieDetailView(movie: movie)) {
+                        MovieRowView(movie: movie)
+                            .onAppear {
+                                if movie == viewModel.movies.last && viewModel.searchText.isEmpty {
+                                    Task {
+                                        await viewModel.fetchMovies()
+                                    }
                                 }
                             }
-                        }
+                    }
                 }
-            }
-            .navigationTitle("Latest Movies")
-            .searchable(text: $viewModel.searchText, prompt: "Search movies...") {
-                ForEach(viewModel.suggestions, id: \.self) { suggestion in
-                    Text(suggestion)
-                        .searchCompletion(suggestion)
-                }
-            }
-            .onAppear {
-                if !hasLoaded {
-                    hasLoaded = true
-                    Task {
-                        await viewModel.fetchMovies()
+                if viewModel.isLoading {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
                     }
                 }
             }
-            .toast(message: $viewModel.errorMessage)
         }
+        .navigationTitle("Latest Movies")
+        .searchable(text: $viewModel.searchText, prompt: "Search movies...") {
+            ForEach(viewModel.suggestions, id: \.self) { suggestion in
+                Text(suggestion)
+                    .searchCompletion(suggestion)
+            }
+        }
+        .onAppear {
+            if !hasLoaded {
+                hasLoaded = true
+                Task {
+                    await viewModel.fetchMovies()
+                }
+            }
+        }
+        .toast(message: $viewModel.errorMessage)
     }
 }
