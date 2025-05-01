@@ -19,23 +19,28 @@ final class MovieListViewModel: ObservableObject {
     @Published var suggestions: [String] = []
     
     private var currentPage = 1
-    private var service: MovieServiceProtocol
     private var debounceTask: Task<Void, Never>?
+    private let fetchMoviesUseCase: FetchLatestMoviesUseCase
+    private let searchUseCase: SearchMoviesUseCase
     
-    init(service: MovieServiceProtocol = MovieService()) {
-        self.service = service
+    init(fetchMoviesUseCase: FetchLatestMoviesUseCase = FetchLatestMoviesUseCaseImpl(),
+         searchUseCase: SearchMoviesUseCase = SearchMoviesUseCaseImpl()) {
+        self.fetchMoviesUseCase = fetchMoviesUseCase
+        self.searchUseCase = searchUseCase
     }
+
     
     func fetchMovies() async {
         guard !isLoading else { return }
         isLoading = true
         do {
-            let newMovies = try await service.fetchLatestMovies(page: currentPage)
+            let newMovies = try await fetchMoviesUseCase.execute(page: currentPage)
             movies.append(contentsOf: newMovies)
             currentPage += 1
             updateSuggestions()
         } catch {
             print("Failed to fetch movies: \(error)")
+            isLoading = false
         }
         isLoading = false
     }
@@ -52,7 +57,7 @@ final class MovieListViewModel: ObservableObject {
         defer { isLoading = false }
 
         do {
-            let results = try await (service as! MovieService).searchMovies(query: searchText)
+            let results = try await searchUseCase.execute(query: searchText)
             movies = results
             updateSuggestions()
         } catch {
