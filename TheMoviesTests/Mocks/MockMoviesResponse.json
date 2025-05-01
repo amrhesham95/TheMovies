@@ -1,0 +1,37 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/mockBackdrop1.jpg",
+      "genre_ids": [28, 12],
+      "id": 1001,
+      "original_language": "en",
+      "original_title": "Mock Movie 1",
+      "overview": "This is the first mock movie for testing.",
+      "popularity": 123.45,
+      "poster_path": "/mockPoster1.jpg",
+      "release_date": "2024-01-01",
+      "title": "Mock Movie 1",
+      "video": false,
+      "vote_average": 7.8,
+      "vote_count": 256
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/mockBackdrop2.jpg",
+      "genre_ids": [16, 35],
+      "id": 1002,
+      "original_language": "en",
+      "original_title": "Mock Movie 2",
+      "overview": "This is the second mock movie for testing.",
+      "popularity": 87.65,
+      "poster_path": "/mockPoster2.jpg",
+      "release_date": "2024-02-15",
+      "title": "Mock Movie 2",
+      "video": false,
+      "vote_average": 6.5,
+      "vote_count": 178
+    }
+  ]
+}
