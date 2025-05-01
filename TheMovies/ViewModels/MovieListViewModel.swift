@@ -12,6 +12,7 @@ protocol MovieListViewModelProtocol: ObservableObject {
     var movies: [Movie] { get }
     var isLoading: Bool { get }
     var searchText: String { get set }
+    var errorMessage: String { get set }
     var suggestions: [String] { get }
 
     func fetchMovies() async
@@ -22,6 +23,7 @@ protocol MovieListViewModelProtocol: ObservableObject {
 final class MovieListViewModel: MovieListViewModelProtocol, ObservableObject {
     @Published var movies: [Movie] = []
     @Published var isLoading = false
+    @Published var errorMessage: String = ""
     @Published var searchText = "" {
         didSet {
             debounceSearch()
@@ -50,8 +52,8 @@ final class MovieListViewModel: MovieListViewModelProtocol, ObservableObject {
             currentPage += 1
             updateSuggestions()
         } catch {
-            print("Failed to fetch movies: \(error)")
             isLoading = false
+            errorMessage = "Failed to fetch movies: \(error.localizedDescription)"
         }
         isLoading = false
     }
@@ -72,7 +74,7 @@ final class MovieListViewModel: MovieListViewModelProtocol, ObservableObject {
             movies = results
             updateSuggestions()
         } catch {
-            print("Search error: \(error)")
+            errorMessage = "Search error: \(error.localizedDescription)"
         }
     }
 

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MovieListView<ViewModel: MovieListViewModelProtocol>: View {
     @StateObject private var viewModel: ViewModel
+    @State private var hasLoaded = false
     
     init(viewModel: ViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -35,10 +36,15 @@ struct MovieListView<ViewModel: MovieListViewModelProtocol>: View {
                         .searchCompletion(suggestion)
                 }
             }
-            .task {
-                await viewModel.fetchMovies()
+            .onAppear {
+                if !hasLoaded {
+                    hasLoaded = true
+                    Task {
+                        await viewModel.fetchMovies()
+                    }
+                }
             }
+            .toast(message: $viewModel.errorMessage)
         }
     }
 }
-
