@@ -11,7 +11,7 @@ protocol FetchLatestMoviesUseCase {
     func execute(page: Int) async throws -> [Movie]
 }
 
-final class FetchLatestMoviesUseCaseImpl: FetchLatestMoviesUseCase {
+ actor FetchLatestMoviesUseCaseImpl: FetchLatestMoviesUseCase {
     private let service: MovieServiceProtocol
 
     init(service: MovieServiceProtocol) {

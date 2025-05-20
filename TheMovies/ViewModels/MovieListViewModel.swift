@@ -15,7 +15,7 @@ protocol MovieListViewModelProtocol: ObservableObject {
     var errorMessage: String { get set }
     var suggestions: [String] { get }
 
-    func fetchMovies() async
+    func onAppear()
     func searchMovies() async
 }
 
@@ -35,15 +35,21 @@ final class MovieListViewModel: MovieListViewModelProtocol, ObservableObject {
     private var debounceTask: Task<Void, Never>?
     private let fetchMoviesUseCase: FetchLatestMoviesUseCase
     private let searchUseCase: SearchMoviesUseCase
-    
+    private var tasks: [Task<Void, Never>] = []
     init(fetchMoviesUseCase: FetchLatestMoviesUseCase,
          searchUseCase: SearchMoviesUseCase) {
         self.fetchMoviesUseCase = fetchMoviesUseCase
         self.searchUseCase = searchUseCase
     }
 
+    func onAppear() {
+        let task = Task {
+            await fetchMovies()
+        }
+        tasks.append(task)
+    }
     
-    func fetchMovies() async {
+    private func fetchMovies() async {
         guard !isLoading else { return }
         isLoading = true
         do {

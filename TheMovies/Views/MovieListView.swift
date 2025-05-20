@@ -23,9 +23,9 @@ struct MovieListView<ViewModel: MovieListViewModelProtocol>: View {
                         MovieRowView(movie: movie)
                             .onAppear {
                                 if movie == viewModel.movies.last && viewModel.searchText.isEmpty {
-                                    Task {
-                                        await viewModel.fetchMovies()
-                                    }
+                                    
+                                    viewModel.onAppear()
+                                    
                                 }
                             }
                     }
@@ -49,9 +49,7 @@ struct MovieListView<ViewModel: MovieListViewModelProtocol>: View {
         .onAppear {
             if !hasLoaded {
                 hasLoaded = true
-                Task {
-                    await viewModel.fetchMovies()
-                }
+                viewModel.onAppear()
             }
         }
         .toast(message: $viewModel.errorMessage)
