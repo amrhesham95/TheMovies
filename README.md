@@ -6,29 +6,30 @@
 
 ## ✨ Features
 
-- 🔍 Search for movies in real time
-- 📄 Movie details with poster, release date, and rating
-- ⬇️ Infinite scroll/pagination support
-- 📱 Built using SwiftUI
-- 🧱 MVVM architecture
+- 🔍 Search for movies in real time  
+- 📄 Movie details with poster, release date, and rating  
+- ⬇️ Infinite scroll/pagination support  
+- 📱 Built using SwiftUI  
+- 🧱 MVVM architecture  
 
 ---
 
 ## 🔧 Tech Stack
 
-- **SwiftUI** – Declarative UI framework
-- **async/await** – Modern concurrency
-- **MVVM** – Clean separation of concerns
-- **URLSession** – Network layer
-- **TMDB API** – Movie data provider
+- **SwiftUI** – Declarative UI framework  
+- **async/await** – Modern concurrency  
+- **MVVM** – Clean separation of concerns  
+- **URLSession** – Network layer  
+- **TMDB API** – Movie data provider  
 
 ---
 
 ## 🏗️ Project Structure
-TheMovies/
-├── Models/ # Codable models for TMDB API
-├── ViewModels/ # ObservableObjects for data/state
-├── Views/ # SwiftUI Views
-├── Services/ # API and network logic
-└── Resources/ # Assets and UI helpers
 
+```plaintext
+TheMovies/
+├── Models/         # Codable models for TMDB API
+├── ViewModels/     # ObservableObjects for data/state
+├── Views/          # SwiftUI Views
+├── Services/       # API and network logic
+└── Resources/      # Assets and UI helpers
