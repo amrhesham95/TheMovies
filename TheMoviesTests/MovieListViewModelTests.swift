@@ -33,22 +33,62 @@ final class MovieListViewModelTests: XCTestCase {
         mockSearchUseCase = nil
         super.tearDown()
     }
-    
-    func test_fetchMovies_success() async {
         
-        await viewModel.fetchMovies()
+    func test_fetchMovies_whenApiCallFinished_isLoadingIsFalse() async {
+        let expectation = XCTestExpectation(description: "loading is set to false after fetch api call finishes")
+        viewModel.$isLoading
+            .dropFirst(2)
+            .receive(on: RunLoop.main)
+            .sink { isLoading in
+                
+                // then
+                XCTAssertFalse(isLoading)
+                expectation.fulfill()
+            }.store(in: &cancellables)
         
-        XCTAssertEqual(viewModel.movies.count, Movie.mock.count)
-        XCTAssertFalse(viewModel.isLoading)
-        XCTAssertEqual(viewModel.suggestions.sorted(), Movie.mock.map { $0.title }.sorted())
+        // when
+        viewModel.onAppear()
+        
+        await fulfillment(of: [expectation], timeout: 2.0)
     }
     
-    func test_fetchMovies_failure() async {
+    func test_fetchMovies_whenApiCallFinished_suggestionsUpdated() async {
+        let expectation = XCTestExpectation(description: "movies suggestions updated after fetch api call")
+        viewModel.$suggestions
+            .dropFirst() // Ignore the initial value
+            .receive(on: RunLoop.main)
+            .sink { suggestions in
+                
+                // then
+                XCTAssertEqual(suggestions.sorted(), Movie.mock.map { $0.title }.sorted())
+                expectation.fulfill()
+            }.store(in: &cancellables)
+        
+        // when
+        viewModel.onAppear()
+        
+        await fulfillment(of: [expectation], timeout: 2.0)
+    }
+    
+    func test_fetchMovies_failure() {
+        let expectation = XCTestExpectation(description: "error message is set after fetch api call failure")
         mockFetchUseCase.shouldFail = true
         
-        await viewModel.fetchMovies()
+        viewModel.$errorMessage
+            .dropFirst()
+            .receive(on: RunLoop.main)
+            .sink { [weak self] errorMessage in
+                
+                // then
+                guard let self = self else { return }
+                XCTAssertEqual(self.viewModel.errorMessage, errorMessage)
+                expectation.fulfill()
+            }.store(in: &cancellables)
         
-        XCTAssertFalse(viewModel.errorMessage.isEmpty)
+        // when
+        viewModel.onAppear()
+        
+        wait(for: [expectation])
     }
     
     func test_whenTextIsUpdated_searchIsExecutedsuccess() {
@@ -107,7 +147,7 @@ final class MovieListViewModelTests: XCTestCase {
             .store(in: &cancellables)
         
         // when: Call fetchMovies() and check isLoading
-        await viewModel.fetchMovies()
+        await viewModel.onAppear()
         
         // then
         await fulfillment(of: [expectationLoadingStart], timeout: 1) // Wait for loading to start

@@ -18,20 +18,12 @@
 			remoteGlobalIDString = FDCDFD412DBFE72F0014A900;
 			remoteInfo = TheMovies;
 		};
-		FDCDFD5E2DBFE7310014A900 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FDCDFD3A2DBFE72F0014A900 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FDCDFD412DBFE72F0014A900;
-			remoteInfo = TheMovies;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		FD086FEF2DC375D9005753FB /* TheMovies.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TheMovies.xctestplan; sourceTree = "<group>"; };
 		FDCDFD422DBFE72F0014A900 /* TheMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDCDFD532DBFE7310014A900 /* TheMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDCDFD5D2DBFE7310014A900 /* TheMoviesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheMoviesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -63,13 +55,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FDCDFD5A2DBFE7310014A900 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -88,7 +73,6 @@
 			children = (
 				FDCDFD422DBFE72F0014A900 /* TheMovies.app */,
 				FDCDFD532DBFE7310014A900 /* TheMoviesTests.xctest */,
-				FDCDFD5D2DBFE7310014A900 /* TheMoviesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,26 +126,6 @@
 			productReference = FDCDFD532DBFE7310014A900 /* TheMoviesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		FDCDFD5C2DBFE7310014A900 /* TheMoviesUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FDCDFD6D2DBFE7310014A900 /* Build configuration list for PBXNativeTarget "TheMoviesUITests" */;
-			buildPhases = (
-				FDCDFD592DBFE7310014A900 /* Sources */,
-				FDCDFD5A2DBFE7310014A900 /* Frameworks */,
-				FDCDFD5B2DBFE7310014A900 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FDCDFD5F2DBFE7310014A900 /* PBXTargetDependency */,
-			);
-			name = TheMoviesUITests;
-			packageProductDependencies = (
-			);
-			productName = TheMoviesUITests;
-			productReference = FDCDFD5D2DBFE7310014A900 /* TheMoviesUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -176,10 +140,6 @@
 						CreatedOnToolsVersion = 16.2;
 					};
 					FDCDFD522DBFE7310014A900 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = FDCDFD412DBFE72F0014A900;
-					};
-					FDCDFD5C2DBFE7310014A900 = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = FDCDFD412DBFE72F0014A900;
 					};
@@ -204,7 +164,6 @@
 			targets = (
 				FDCDFD412DBFE72F0014A900 /* TheMovies */,
 				FDCDFD522DBFE7310014A900 /* TheMoviesTests */,
-				FDCDFD5C2DBFE7310014A900 /* TheMoviesUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -218,13 +177,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		FDCDFD512DBFE7310014A900 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FDCDFD5B2DBFE7310014A900 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -248,13 +200,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FDCDFD592DBFE7310014A900 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -262,11 +207,6 @@
 			isa = PBXTargetDependency;
 			target = FDCDFD412DBFE72F0014A900 /* TheMovies */;
 			targetProxy = FDCDFD542DBFE7310014A900 /* PBXContainerItemProxy */;
-		};
-		FDCDFD5F2DBFE7310014A900 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FDCDFD412DBFE72F0014A900 /* TheMovies */;
-			targetProxy = FDCDFD5E2DBFE7310014A900 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -503,48 +443,6 @@
 			};
 			name = Release;
 		};
-		FDCDFD6E2DBFE7310014A900 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MACOSX_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.exdevs.TheMoviesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = TheMovies;
-				XROS_DEPLOYMENT_TARGET = 2.2;
-			};
-			name = Debug;
-		};
-		FDCDFD6F2DBFE7310014A900 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MACOSX_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.exdevs.TheMoviesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = TheMovies;
-				XROS_DEPLOYMENT_TARGET = 2.2;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -571,15 +469,6 @@
 			buildConfigurations = (
 				FDCDFD6B2DBFE7310014A900 /* Debug */,
 				FDCDFD6C2DBFE7310014A900 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FDCDFD6D2DBFE7310014A900 /* Build configuration list for PBXNativeTarget "TheMoviesUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FDCDFD6E2DBFE7310014A900 /* Debug */,
-				FDCDFD6F2DBFE7310014A900 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
